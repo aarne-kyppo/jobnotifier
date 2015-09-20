@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; media-src *; connect-src http://aarnekyppo.com:* ws://aarnekyppo.com:*; script-src 'self' https://cdn.socket.io">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <title>Työpaikkahaku</title>
+    </head>
+    <body>
+        <div class="app">
+          <h1>Työpaikkahaku</h1>
+          <div id="selectors"></div>
+          <div id="positions"></div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="lib/react/react.min.js"></script>
+        <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="lib/pubsub-js/src/pubsub.js"></script>
+        <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+        <script type="text/javascript" src="js/selectors.js"></script>
+        <script type="text/javascript" src="js/positions.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
