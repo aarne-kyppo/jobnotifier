@@ -1,0 +1,24 @@
+{
+  "name": "jobnotifier",
+  "version": "0.0.1",
+  "homepage": "https://github.com/aarne-kyppo/jobnotifier",
+  "authors": [
+    "Aarne Kyppö <kyppoa@gmail.com>"
+  ],
+  "description": "Cordova application to view new jobposts in the service provided by Finnish Ministry of Labour",
+  "main": "www/index.html",
+  "keywords": [
+    "Cordova",
+    "React",
+    "Socket.io"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "Feed": "feed#*",
+    "pubsub-js": "~1.5.2",
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4",
+    "socket.io": "~1.3.6",
+    "react": "~0.13.3"
+  }
+}
