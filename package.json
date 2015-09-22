@@ -1,6 +1,6 @@
 {
   "name": "jobnotifier",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Cordova application to view new jobposts in the service provided by Finnish Ministry of Labour",
   "main": "www/index.html",
   "dependencies": {

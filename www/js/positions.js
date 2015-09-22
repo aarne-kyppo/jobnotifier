@@ -4,7 +4,7 @@
     render: function() {
       var element;
       element = function(position, index) {
-        return React.createElement("p", null, position.title);
+        return React.createElement("p", null, React.createElement("a", {href: position.link}, position.title));
       };
       return React.createElement("div", null, this.props.positions.map(element));
     }
@@ -18,11 +18,10 @@
     },
     componentDidMount: function() {
       var componentscope = this;
-      this.selectionChangedToken = PubSub.subscribe("selectionChanged", this.loadPositions.bind(this));
+      this.selectionChangedToken = PubSub.subscribe('selectionChanged', this.loadPositions.bind(this));
       this.socket = io.connect('http://aarnekyppo.com:3000/rss2stream');
       this.socket.on('newItem',function(data){
         var positionstmp = [data.item].concat(componentscope.state.positions);
-        console.log("sdgsdg");
         componentscope.setState({
           positions: positionstmp
         });
@@ -37,7 +36,6 @@
       });
       this.socket.emit('unsubscribe',{});
       this.socket.emit('subscribe',{url: url});
-      console.log("aaa");
     },
     render: function() {
       return (
