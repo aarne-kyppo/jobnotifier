@@ -4,9 +4,29 @@
     render: function() {
       var element;
       element = function(position, index) {
-        return <p><a href={position.link}>{position.title}</a></p>;
+        return(<tr>
+                <td>
+                  <a className="positionwidget" href={position.link}>
+                    <span>{position.title}</span>
+                  </a>
+                </td>
+              </tr>
+              );
       };
-      return <div>{this.props.positions.map(element)}</div>;
+      return (
+        <table className="table table-striped table-bordered">
+          <caption>
+            {(() => {
+              if(this.props.positions.length > 0)
+              {
+                return "Löytyi " + this.props.positions.length + " paikkaa";
+              }
+              return "";
+            })()}
+          </caption>
+          <tbody>{this.props.positions.map(element)}</tbody>
+        </table>
+      );
     }
   });
 

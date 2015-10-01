@@ -3,47 +3,62 @@
   var selectorClass, selectors;
 
   selectors = React.createClass({
-    getInitialState: function() {
-      return {
-        area: "",
-        with_rental: true,
-        only_rental: false,
-        oppisopimus: false,
-        lang: "fi",
-        searchText: ""
-      };
-    },
     searchChanged: function(e) {
       e.preventDefault();
-      alert($("#area").val());
-      this.setState({
-        area: $("#area").val()
-      });
       PubSub.publish("selectionChanged", this.getURL());
     },
+    //Getting corresponding string value of boolean variable for URL
     boolToString: function(value) {
       return value ? "true" : "false";
     },
+    //Function to give correct URL for given options.
     getURL: function() {
-      var oppisopimus, params, rental, rooturl, area;
+      var params, rental, rooturl, area, searchText;
+      //Some default values needed for URL
+      var with_rental = true;
+      var only_rental = false;
+      var oppisopimus = false;
+      var lang = "fi";
+
       rooturl = "http://www.mol.fi/tyopaikat/tyopaikkatiedotus/haku/tyopaikat.rss?";
       rental = "---";
-      if (this.state.only_rental) {
+      if (only_rental) {
         rental = "true";
-      } else if (!this.state.with_rental) {
+      } else if (!with_rental) {
         rental = "false";
       }
-      oppisopimus = this.boolToString(this.state.oppisopimus);
+      var oppisopimus_param = this.boolToString(oppisopimus);
       area = $("#area").val();
-      params = ["hakusanakentta=sanahaku", "ilmoitettuPvm=1", "vuokrapaikka=" + rental, "alueet=" + area, "oppisopimus=" + oppisopimus, "lang=" + this.state.lang, "hakusana=" + this.state.searchText];
-      return "" + rooturl + (params.join('&'));
+      searchText = $("#searchText").val();
+      params = [
+        "hakusanakentta=sanahaku",
+        "ilmoitettuPvm=1",
+        "vuokrapaikka=" + rental,
+        "alueet=" + area,
+        "oppisopimus=" + oppisopimus_param,
+        "lang=" + lang,
+        "hakusana=" + searchText
+      ];
+      return "" + rooturl + (params.join("&"));
     },
     render: function() {
       return (
         <div>
-          <label for="city">Alue</label>
-          <input type="text" id="area"/>
-          <input type="submit" value="Hae" onClick={this.searchChanged}/>
+          <div className="form-horizontal">
+            <div className="form-group container-fluid">
+              <div className="col-xs-12">
+                <input type="text" id="area" className="form-control" placeholder="Alue"/>
+              </div>
+            </div>
+            <div className="form-group container-fluid">
+              <div className="col-xs-12">
+                <input type="text" id="searchText" className="form-control" placeholder="Sanahaku"/>
+              </div>
+            </div>
+            <div className="form-group container-fluid">
+              <input type="submit" id="submit" value="Hae" className="btn col-xs-2 col-xs-offset-10" onClick={this.searchChanged}/>
+            </div>
+          </div>
         </div>
       );
     }

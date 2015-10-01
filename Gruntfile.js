@@ -16,7 +16,8 @@ module.exports = function(grunt){
               'pubsub-js/src/pubsub.js',
               'jquery/dist/jquery.min.js',
               'Feed/src/feed.min.js',
-              'bootstrap/dist/css/bootstrap.min.css'
+              'bootstrap/dist/css/bootstrap.min.css',
+              'bootstrap/dist/css/bootstrap-theme.min.css'
             ],
             dest: '<%= options.dest %>',
             filter: 'isFile',
@@ -48,19 +49,32 @@ module.exports = function(grunt){
         ext: '.js',
       }
     },
-    react: {
-      all: {
-        expand: true,
-        cwd: '<%= options.js_root %>',
-        src: ['*.jsx'],
-        dest: '<%= options.js_root %>',
-        ext: '.js'
+    browserify: {
+      options: {
+        debug: true,
+        extensions: ['.jsx'],
+        transform: ['babelify']
+      },
+      dist: {
+        src: ['<%= options.js_root %>/*.jsx'],
+        dest: '<%= options.js_root %>/react_components.js'
+      }
+    },
+    sass: {
+      dist: {
+        options: {
+          sourcemap: 'none'
+        },
+        files: {
+          'www/css/index.css' : 'www/css/index.sass'
+        }
       }
     }
   });
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-react');
-  grunt.registerTask('default',['copy','react','jshint']);
+  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-browserify');
+  grunt.registerTask('default',['copy','browserify','sass']);
 }
