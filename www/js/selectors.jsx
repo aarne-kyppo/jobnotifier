@@ -2,7 +2,7 @@
   "use strict";
   var selectorClass, selectors;
 
-  selectors = React.createClass({
+  selectors = React.createClass({displayName: "selectors",
     searchChanged: function(e) {
       e.preventDefault();
       PubSub.publish("selectionChanged", this.getURL());
@@ -10,6 +10,8 @@
     //Getting corresponding string value of boolean variable for URL
     boolToString: function(value) {
       return value ? "true" : "false";
+    },
+    componentDidMount: function(){
     },
     //Function to give correct URL for given options.
     getURL: function() {
@@ -43,23 +45,23 @@
     },
     render: function() {
       return (
-        <div>
-          <div className="form-horizontal">
-            <div className="form-group container-fluid">
-              <div className="col-xs-12">
-                <input type="text" id="area" className="form-control" placeholder="Alue"/>
-              </div>
-            </div>
-            <div className="form-group container-fluid">
-              <div className="col-xs-12">
-                <input type="text" id="searchText" className="form-control" placeholder="Sanahaku"/>
-              </div>
-            </div>
-            <div className="form-group container-fluid">
-              <input type="submit" id="submit" value="Hae" className="btn col-xs-2 col-xs-offset-10" onClick={this.searchChanged}/>
-            </div>
-          </div>
-        </div>
+        React.createElement("div", null,
+          React.createElement("div", {className: "form-horizontal"},
+            React.createElement("div", {className: "form-group container-fluid"},
+              React.createElement("div", {className: "col-xs-12"},
+                React.createElement("input", {type: "text", id: "area", className: "form-control", placeholder: "Alue"})
+              )
+            ),
+            React.createElement("div", {className: "form-group container-fluid"},
+              React.createElement("div", {className: "col-xs-12"},
+                React.createElement("input", {type: "text", id: "searchText", className: "form-control", placeholder: "Sanahaku"})
+              )
+            ),
+            React.createElement("div", {className: "form-group container-fluid"},
+              React.createElement("input", {type: "submit", id: "submit", value: "Hae", className: "btn col-xs-2 col-xs-offset-10", onClick: this.searchChanged})
+            )
+          )
+        )
       );
     }
   });

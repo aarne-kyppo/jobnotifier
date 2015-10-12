@@ -40,15 +40,6 @@ module.exports = function(grunt){
         'www/js/*.js',
       ]
     },
-    coffee: {
-      compile: {
-        expand: true,
-        cwd: '<%= options.js_root %>',
-        src: ['*.coffee'],
-        dest: '<%= options.js_root %>',
-        ext: '.js',
-      }
-    },
     browserify: {
       options: {
         debug: true,
@@ -72,7 +63,6 @@ module.exports = function(grunt){
     }
   });
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-browserify');

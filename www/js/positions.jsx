@@ -1,36 +1,36 @@
 (function(){
   "use strict";
-  var positionList = React.createClass({
+  var positionList = React.createClass({displayName: "positionList",
     render: function() {
       var element;
       element = function(position, index) {
-        return(<tr>
-                <td>
-                  <a className="positionwidget" href={position.link}>
-                    <span>{position.title}</span>
-                  </a>
-                </td>
-              </tr>
+        return(React.createElement("tr", null,
+                React.createElement("td", null,
+                  React.createElement("a", {className: "positionwidget", href: position.link},
+                    React.createElement("span", null, position.title)
+                  )
+                )
+              )
               );
       };
       return (
-        <table className="table table-striped table-bordered">
-          <caption>
-            {(() => {
+        React.createElement("table", {className: "table table-striped table-bordered"},
+          React.createElement("caption", null,
+            (() => {
               if(this.props.positions.length > 0)
               {
                 return "Löytyi " + this.props.positions.length + " paikkaa";
               }
               return "";
-            })()}
-          </caption>
-          <tbody>{this.props.positions.map(element)}</tbody>
-        </table>
+            })()
+          ),
+          React.createElement("tbody", null, this.props.positions.map(element))
+        )
       );
     }
   });
 
-  var positions = React.createClass({
+  var positions = React.createClass({displayName: "positions",
     getInitialState: function() {
       return {
         positions: []
@@ -59,9 +59,9 @@
     },
     render: function() {
       return (
-        <div>
-          <positionList positions={this.state.positions}/>
-        </div>
+        React.createElement("div", null,
+          React.createElement("positionList", {positions: this.state.positions})
+        )
       );
     }
   });
